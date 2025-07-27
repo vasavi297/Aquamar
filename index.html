@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF‑8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aquamar – Empowering Fishers</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body, html { height: 100%; }
+
+    /* Loader */
+    #loader {
+      position: fixed; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; color: white; font-size: 3em; z-index: 999;
+    }
+    #loader video {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;
+    }
+    #loader div {
+      font-weight: bold;
+      font-size: 2.5em;
+      color: white;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    }
+    #loader h1 {
+      font-size: 0.8em; margin-top: 10px; max-width: 80%; text-align: center;
+    }
+
+    #main {
+      display: none;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #0077cc; color: white; padding: 1em;
+    }
+    nav .logo { font-size: 1.5em; font-weight: bold; }
+    nav .nav-links { display: flex; gap: 1em; }
+    nav a { color: white; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    nav input.search { padding: 0.3em 0.5em; border-radius: 4px; border: none; }
+
+    /* Intro Section */
+    section.intro {
+  text-align: center;
+  background: url('images/bg2.avif') no-repeat center center/cover;
+  color: white;
+  padding: 3em 1em;
+  position: relative;
+}
+
+    section.intro h1 { font-size: 3em; margin-bottom: 0.5em; }
+    section.intro p { font-size: 1.1em; }
+
+    /* Products Grid */
+    .products {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 1.5em; padding: 2em;
+    }
+    .product {
+      background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .product img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; }
+    .product-body { padding: 1em; }
+    .product-body h3 { margin: 0.5em 0; }
+    .product-body p { font-size: 0.9em; }
+    .product-body button {
+      margin-top: 0.5em; padding: 0.5em 1em;
+      background: #0077cc; color: white; border: none; border-radius: 4px;
+      cursor: pointer;
+    }
+    .product-body button:hover { background: #005fa3; }
+
+    /* Modal Styles */
+    #modal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6); z-index: 10000;
+      justify-content: center; align-items: center;
+    }
+    #modal-content {
+      background: white; padding: 20px; border-radius: 10px;
+      max-width: 500px; width: 90%; text-align: center; position: relative;
+    }
+    #modal-content span {
+      position: absolute; top: 10px; right: 15px;
+      cursor: pointer; font-size: 20px; font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="loader">
+    <video autoplay muted loop><source src="loader-video.mp4" type="video/mp4"></video>
+    <div>Aquamar</div>
+    <h1>Click, Catch, Care – The Smart Way to Buy Fish</h1>
+  </div>
+
+  <div id="main">
+    <nav>
+      <div class="logo">Aquamar</div>
+      <div class="nav-links">
+        <a href="#intro">Home</a>
+        <a href="cart.html" target="_blank">Cart</a>
+        <a href="faq.html" target="_blank">FAQs</a>
+        <input class="search" type="text" placeholder="Search fish...">
+      </div>
+    </nav>
+
+    <section class="intro" id="intro">
+      <h1>Welcome to Aquamar</h1>
+      <p>Buy fresh fish directly from trusted fishers. Browse products, order safely, and stay informed.</p>
+    </section>
+
+    <section class="products">
+      <div class="product">
+        <img src="images/fish1.jpg" alt="Rohu Fish" class="fish-img" data-benefit="Rohu is rich in Omega‑3 fatty acids and high in protein, promoting brain health and heart function.">
+        <div class="product-body">
+          <h3>Rohu Fish</h3>
+          <p>Rich in Omega‑3 fatty acids and high in protein</p>
+          <p>₹200 / kg</p>
+         <button onclick="addToCart('Rohu Fish', 200, 'images/fish1.jpg')">Add to Cart</button>
+
+        </div>
+      </div>
+      <div class="product">
+        <img src="images/fish2.jpg" alt="Prawn" class="fish-img" data-benefit="Prawns are rich in protein, omega‑3s, and antioxidants like selenium, promoting heart health, brain function, and strong bones.">
+        <div class="product-body">
+          <h3>Prawn</h3>
+          <p>Low in calories, high in selenium and protein</p>
+          <p>₹350 / kg</p>
+        
+          <button onclick="addToCart('Prawn', 350, 'images/fish2.jpg')">Add to Cart</button>
+        </div>
+      </div>
+      <div class="product">
+        <img src="images/fish3.jpg" alt="Catla" class="fish-img" data-benefit="Catla is high in essential vitamins and minerals, supporting muscle strength and overall health.">
+        <div class="product-body">
+          <h3>Catla Fish</h3>
+          <p>Boosts muscle and brain health, vitamin‑rich</p>
+          <p>₹250 / kg</p>
+         <button onclick="addToCart('Catla Fish', 250, 'images/fish3.jpg')">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal">
+    <div id="modal-content">
+      <span id="closeModal">&times;</span>
+      <h2>Health Benefit</h2>
+      <p id="benefitText"></p>
+    </div>
+  </div>
+
+  <script>
+    const fromOtherPage = 
+      performance.navigation.type === performance.navigation.TYPE_BACK_FORWARD || 
+      document.referrer.includes("cart.html") || 
+      document.referrer.includes("faq.html");
+
+    window.addEventListener('load', () => {
+      if (fromOtherPage) {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('main').style.display = 'block';
+      } else {
+        setTimeout(() => {
+          document.getElementById('loader').style.display = 'none';
+          document.getElementById('main').style.display = 'block';
+        }, 3000);
+      }
+    });
+
+    // Modal JS
+    document.querySelectorAll('.fish-img').forEach(img => {
+      img.addEventListener('click', () => {
+        const benefit = img.getAttribute('data-benefit');
+        document.getElementById('benefitText').innerText = benefit;
+        document.getElementById('modal').style.display = 'flex';
+      });
+    });
+
+    document.getElementById('closeModal').addEventListener('click', () => {
+      document.getElementById('modal').style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target.id === 'modal') {
+        document.getElementById('modal').style.display = 'none';
+      }
+    });
+  </script>
+  <script>
+  function addToCart(name, price, image) {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ name, price, image, qty: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`${name} added to cart`);
+  }
+</script>
+
+
+</body>
+</html>
